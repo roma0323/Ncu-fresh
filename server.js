@@ -47,26 +47,28 @@ app.set('view engine','ejs')
 app.use(express.urlencoded({extended:false}))
 app.use(methodOverride('_method'))
 
-app.get('/index',checkAuthenticated,async(req,res)=>{          //測試方便  checkAuthenticated
+
+app.get('/test_vue',checkNotAuthenticated,(req,res)=>{
+  res.render('articles/vue_test.ejs')
+})
+
+app.get('/index',checkAuthenticated,async(req,res)=>{        
     const articles=await ArticleDb.find().sort({createdAt:'desc'})
     res.render('articles/index.ejs',{articles:articles,name:req.user.name})       
 })
 
-//-----
-/*app.get('/loginsuccess',checkAuthenticated,(req,res)=>{
-    res.render('loginsuccess.ejs',{name:req.user.name})        //可以req 是session的功勞
-})
-*/
+
 app.get('/login',checkNotAuthenticated,(req,res)=>{
     res.render('articles/login.ejs')
 })
+
 
 app.post('/login',checkNotAuthenticated,  passport.authenticate('local', {
     successRedirect: '/index',
     failureRedirect: '/login',
     failureFlash: true
-    
-  }))
+  }
+  ))
 
 app.get('/register',checkNotAuthenticated,(req,res)=>{
     res.render('articles/register.ejs')
@@ -80,8 +82,11 @@ app.post('/register',async(req,res)=>{
           name: req.body.name,
           email: req.body.email,
           password: hashedPassword
+          
         })
         res.redirect('/login')
+      
+        
       } catch {
         res.redirect('/register')
       }

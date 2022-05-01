@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <title>blog</title>
+    <link href="output.css" rel="stylesheet">
+
+
+</head>
+<body>
+    
+
+
+
+  <p id="app">
+    
+    {{ message }},
+    {{price}},
+    {{amount*price}}
+</p>
+<div id ="bind" >
+  <p v-bind:id="customId" v-bind:class="bg">...svscs</p>
+  
+</div>
+
+  
+
+
+  <script src="https://unpkg.com/vue@next"></script>
+  <script>  
+    const vm = Vue.createApp({
+      data(){
+        return{
+          message:'heeeeeee',
+          price:100,
+          amount:2,
+          bg:'bg-pink-500',
+          isActive: true,
+         hasError: false
+        }
+      },
+      methods:{
+        totalmethod:function(){
+          return 100*100;
+        }
+      },
+      computed:{
+        totalcompute:function(){
+          return 100*100;
+        }
+      }
+    });
+
+    
+
+    const kk = Vue.createApp({
+      data(){
+        return{
+          customId: 'item-id-1',
+          bg:'bg-pink-500',
+          
+        }
+      },
+    });
+    kk.mount('#bind');
+    const vmountinstance = vm.mount('#app');
+    vmountinstance.$data.amount=5;
+
+   
+
+
+   </script>
+</body>
+</html>
+
+
+
+
