@@ -49,7 +49,7 @@ app.use(methodOverride('_method'))
 
 
 app.get('/test_vue',checkNotAuthenticated,(req,res)=>{
-  res.render('articles/vue_test.ejs')
+  res.render('articles/vue_chapter_2.ejs')
 })
 
 app.get('/index',checkAuthenticated,async(req,res)=>{        
